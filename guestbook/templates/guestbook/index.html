@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta http-equiv="content-style-type" content="text/css" />
+
+<meta NAME="ROBOTS" CONTENT="NOINDEX,NOFOLLOW,NOARCHIVE">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0"><title>test page</title>
+</head>
+<body>
+Guestbook<br />
+<br />
+
+    {% for greeting in greetings %}
+    {% if greeting.author %}
+    <b>{{ greeting.author }}</b> wrote:
+    {% else %}
+    An anonymous person wrote:
+    {% endif %}
+    <blockquote>{{ greeting.content|escape }}</blockquote>
+    {% endfor %}
+
+<form action="/guestbook/sign/" method="post">
+{% csrf_token %}
+author:<br />
+<div><input type="text" name="author" size="60"></textarea></div>
+content:<br />
+<div><textarea name="content" rows="3" cols="60"></textarea></div>
+<div><input type="submit" value="Sign Guestbook"></div>
+</form>
+
+</body>
+</html>
